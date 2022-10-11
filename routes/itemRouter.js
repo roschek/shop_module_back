@@ -1,8 +1,9 @@
 const Router = require('express')
 const itemController = require('../controllers/itemController')
 const router = new Router()
+const checkRoleMiddleware = require('../middleware/CheckRoleMiddleware')
 
-router.post('/', itemController.create)
+router.post('/', checkRoleMiddleware('ADMIN'), itemController.create)
 router.get('/', itemController.getAll)
 router.get('/:id', itemController.getItem)
 
